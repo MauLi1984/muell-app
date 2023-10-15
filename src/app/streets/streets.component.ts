@@ -22,7 +22,6 @@ export class StreetsComponent implements OnInit{
       .subscribe(ergebnis => {
         this.streets = ergebnis;
         this.anzahl = ergebnis.length;
-        //console.log(ergebnis)
       });
   }
 
