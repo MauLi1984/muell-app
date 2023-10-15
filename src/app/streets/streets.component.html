@@ -1,4 +1,9 @@
 <div>
+  <div>
+    <p>Suche:
+    <input type="text" [(ngModel)]="filterString" (keyup)="filter()">
+    </p>
+  </div>
   <div>Anzahl Straßen in Nürnberg: {{anzahl}}</div>
   <table>
     <tbody>

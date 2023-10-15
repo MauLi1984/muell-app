@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Street, StreetService} from "../services/street.service";
-
-
-
+import {map, filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-streets',
@@ -12,8 +10,11 @@ import {Street, StreetService} from "../services/street.service";
 export class StreetsComponent implements OnInit{
 
   streets: Street[] = [];
-  anzahl = 0;
+  anzahl: number = 0;
+  filterString: string = "";
+
   constructor(private streetService: StreetService) {
+  
   }
 
   ngOnInit(): void {
@@ -21,7 +22,19 @@ export class StreetsComponent implements OnInit{
       .subscribe(ergebnis => {
         this.streets = ergebnis;
         this.anzahl = ergebnis.length;
+        //console.log(ergebnis)
       });
   }
 
+  filter(): void {
+    console.log(this.filterString);
+    this.streetService.getStreets().pipe(
+      map(streets => streets.filter(
+        street => street.name.toLowerCase().includes(this.filterString.toLowerCase())
+      ))
+    ).subscribe(ergebnis => {
+      this.streets = ergebnis;
+      this.anzahl = ergebnis.length;
+    });
+  }
 }
