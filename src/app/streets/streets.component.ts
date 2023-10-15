@@ -27,7 +27,7 @@ export class StreetsComponent implements OnInit{
   }
 
   filter(): void {
-    console.log(this.filterString);
+    //console.log(this.filterString);
     this.streetService.getStreets().pipe(
       map(streets => streets.filter(
         street => street.name.toLowerCase().includes(this.filterString.toLowerCase())
